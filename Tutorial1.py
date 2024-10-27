@@ -14,14 +14,13 @@ POP_SIZE = 500
 TARGET = st.text_input("Enter your name")
 
 #GENES: Options from which our population would be created.
-GENES = ' abcdefghijklmnopqrstuvwxyz'
+GENES = 'abcdefghijklmnopqrstuvwxyz'
 
 #MUT_RATE: Rate at which our string will be changed.
 MUT_RATE = st.number_input("Enter your mutation rate")
 
 #'Calculate' button widget
-if st.button("Calculate"):
-    result = main(POP_SIZE, TARGET, GENES, MUT_RATE)
+st.button("Calculate")
                   
 #initialization
 
