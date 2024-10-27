@@ -11,8 +11,11 @@ import random
 POP_SIZE = 500
 
 #TARGET: Our goal.
-TARGET = st.text_input("Enter Your Name")
+TARGET = st.text_input("Enter your name")
 
 #GENES: Options from which our population would be created.
 GENES = ' abcdefghijklmnopqrstuvwxyz'
+
+#MUT_RATE: Rate at which our string will be changed.
+MUT_RATE = st.number_input("Enter your mutation rate")
 
