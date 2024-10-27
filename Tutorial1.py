@@ -19,7 +19,7 @@ GENES = ' abcdefghijklmnopqrstuvwxyz'
 #MUT_RATE: Rate at which our string will be changed.
 MUT_RATE = st.number_input("Enter your mutation rate")
 
-st.button("Calculate", type = "primary")
+st.button("Calculate")
 
 #initialization
 
