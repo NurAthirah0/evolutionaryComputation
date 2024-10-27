@@ -133,4 +133,4 @@ def main(POP_SIZE, MUT_RATE, TARGET, GENES):
 
 result = main(POP_SIZE, MUT_RATE, TARGET, GENES)
 
-result
+print('result')
