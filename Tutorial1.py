@@ -20,8 +20,9 @@ GENES = ' abcdefghijklmnopqrstuvwxyz'
 MUT_RATE = st.number_input("Enter your mutation rate")
 
 #'Calculate' button widget
-st.button("Calculate")
-
+if st.button("Calculate"):
+    result = main(POP_SIZE, TARGET, GENES, MUT_RATE)
+                  
 #initialization
 
 def initialize_pop(TARGET):
