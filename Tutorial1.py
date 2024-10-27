@@ -92,7 +92,7 @@ def replace(new_gen, population):
 
 #main
 
-def main(POP_SIZE, MUT_RATE, TARGET, GENES):
+def main(POP_SIZE, TARGET, GENES, MUT_RATE):
     # 1) initialize population
     initial_population = initialize_pop(TARGET)
     found = False
@@ -134,6 +134,6 @@ def main(POP_SIZE, MUT_RATE, TARGET, GENES):
       st.write('String: ' + str(population[0][0]) + ' Generation: ' + str(generation) + ' Fitness: ' + str(population[0][1]))
       generation+=1
 
-result = main(POP_SIZE, TARGET, MUT_RATE, GENES)
+result = main(POP_SIZE, TARGET, GENES, MUT_RATE)
 
 result
