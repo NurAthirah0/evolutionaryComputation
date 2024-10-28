@@ -17,7 +17,7 @@ TARGET = st.text_input("Enter your name", "athirah")
 GENES = 'abcdefghijklmnopqrstuvwxyz'
 
 #MUT_RATE: Rate at which our string will be changed.
-MUT_RATE = st.number_mutate("Enter your mutation rate")
+MUT_RATE = st.number_input("Enter your mutation rate", "0.10")
 
 #'Calculate' button widget
 st.button("Calculate")
