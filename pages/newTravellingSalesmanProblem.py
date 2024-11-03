@@ -9,7 +9,7 @@ import seaborn as sns
 import streamlit as st
 
 # User input for city names (separated by commas)
-city_names_input = st.text_input("Enter city names separated by commas:")
+city_names_input = st.text_input("Enter city names (separated by commas):")
 cities_names = [name.strip() for name in city_names_input.split(',')]
 
 # Display a text area for entering coordinates (one coordinate pair per line)
