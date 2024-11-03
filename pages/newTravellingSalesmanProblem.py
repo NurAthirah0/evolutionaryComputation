@@ -9,12 +9,14 @@ import seaborn as sns
 import streamlit as st
 
 # User input for city names (separated by commas)
-city_names_input = st.text_input("Enter city names (separated by commas):")
+city_names_input = st.text_input("Enter city names (separated by commas ','):")
 cities_names = [name.strip() for name in city_names_input.split(',')]
 
 # Display a text area for entering coordinates (one coordinate pair per line)
 coords_input = st.text_area("Enter city coordinates (x, y) for each city on a new line:")
 coordinates = [tuple(map(float, line.split(','))) for line in coords_input.splitlines()]
+
+st.button("Create")
 
 # Check if number of cities and coordinates match
 if len(cities_names) != len(coordinates):
