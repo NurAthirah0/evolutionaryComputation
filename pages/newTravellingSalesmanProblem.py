@@ -8,42 +8,32 @@ import pandas as pd
 import seaborn as sns
 import streamlit as st
 
+# User input for city names (separated by commas)
+city_names_input = st.text_input("Enter city names separated by commas:", "Gliwice, Cairo, Rome, Krakow, Paris, Alexandria, Berlin, Tokyo, Rio, Budapest")
+cities_names = [name.strip() for name in city_names_input.split(',')]
 
-import streamlit as st
-import matplotlib.pyplot as plt
-import seaborn as sns
-import numpy as np
-from itertools import permutations
-import random
+# Display a text area for entering coordinates (one coordinate pair per line)
+coords_input = st.text_area("Enter city coordinates (x, y) for each city on a new line:", "0,1\n3,2\n6,1\n7,4.5\n15,-1\n10,2.5\n16,11\n5,6\n8,9\n1.5,12")
+coordinates = [tuple(map(float, line.split(','))) for line in coords_input.splitlines()]
 
-# User inputs for cities and coordinates
-n_cities = st.number_input("Enter the number of cities:", min_value=2, max_value=20, value=10)
+# Check if number of cities and coordinates match
+if len(cities_names) != len(coordinates):
+    st.error("The number of cities and coordinates do not match. Please enter the correct number of coordinates.")
+else:
+    # Create dictionary for city coordinates
+    city_coords = dict(zip(cities_names, coordinates))
 
-cities_names = []
-x = []
-y = []
+    # Plotting
+    fig, ax = plt.subplots()
+    colors = sns.color_palette("pastel", len(cities_names))
 
-for i in range(n_cities):
-    city_name = st.text_input(f"Enter the name of city {i+1}:", value=f"City{i+1}")
-    city_x = st.number_input(f"Enter the x-coordinate for {city_name}:", value=random.uniform(-10, 10))
-    city_y = st.number_input(f"Enter the y-coordinate for {city_name}:", value=random.uniform(-10, 10))
-    cities_names.append(city_name)
-    x.append(city_x)
-    y.append(city_y)
+    for i, (city, (city_x, city_y)) in enumerate(city_coords.items()):
+        color = colors[i]
+        ax.scatter(city_x, city_y, c=[color], s=1200, zorder=2)
+        ax.annotate(city, (city_x, city_y), fontsize=12, ha='center', va='center')
 
-city_coords = dict(zip(cities_names, zip(x, y)))
-
-# Plotting the cities on the map
-fig, ax = plt.subplots()
-colors = sns.color_palette("pastel", len(cities_names))
-
-for i, (city, (city_x, city_y)) in enumerate(city_coords.items()):
-    color = colors[i]
-    ax.scatter(city_x, city_y, c=[color], s=1200, zorder=2)
-    ax.annotate(city, (city_x, city_y), fontsize=12, ha='center', va='center')
-
-fig.set_size_inches(10, 8)
-st.pyplot(fig)
+    fig.set_size_inches(10, 8)
+    st.pyplot(fig)
 
 #population
 def initial_population(cities_list, n_population = 250):
