@@ -13,7 +13,7 @@ city_names_input = st.text_input("Enter city names separated by commas:")
 cities_names = [name.strip() for name in city_names_input.split(',')]
 
 # Display a text area for entering coordinates (one coordinate pair per line)
-coords_input = st.text_area("Enter city coordinates (x, y) for each city on a new line:", "0,1\n3,2\n6,1\n7,4.5\n15,-1\n10,2.5\n16,11\n5,6\n8,9\n1.5,12")
+coords_input = st.text_area("Enter city coordinates (x, y) for each city on a new line:")
 coordinates = [tuple(map(float, line.split(','))) for line in coords_input.splitlines()]
 
 # Check if number of cities and coordinates match
