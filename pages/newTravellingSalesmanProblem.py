@@ -8,9 +8,16 @@ import pandas as pd
 import seaborn as sns
 import streamlit as st
 
-x = [0,3,6,7,15,10,16,5,8,1.5]
-y = [1,2,1,4.5,-1,2.5,11,6,9,12]
-cities_names = ["Gliwice", "Cairo", "Rome", "Krakow", "Paris", "Alexandria", "Berlin", "Tokyo", "Rio", "Budapest"]
+
+#TAREGT: cities name
+TARGET = st.text_input("Enter city name")
+
+#'Calculate' button widget
+st.button("Calculate")
+
+x = []
+y = []
+cities_names = []
 city_coords = dict(zip(cities_names, zip(x, y)))
 n_population = 250
 crossover_per = 0.8
