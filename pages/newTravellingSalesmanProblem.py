@@ -7,7 +7,7 @@ import random
 from random import shuffle
 
 # Set up user input form for cities and coordinates
-st.title("City Coordinates Input for TSP")
+st.title("City Coordinates Input")
 
 # Default city values
 default_cities = [
@@ -30,8 +30,7 @@ y = []
 
 # Collect input from the user for each city
 for i, default_city in enumerate(default_cities):
-    city_name = st.text_input(f"City {i+1} Name", value=default_city["name"])
-    city_x = st.number_input(f"City {city_name} X-coordinate", value=default_city["x"])
+    city_name = st.text_input(f"City {i+1} Name", value=default_city["name"]), city_x = st.number_input(f"City {city_name} X-coordinate", value=default_city["x"]), 
     city_y = st.number_input(f"City {city_name} Y-coordinate", value=default_city["y"])
 
     cities_names.append(city_name)
