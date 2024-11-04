@@ -41,8 +41,9 @@ for i in range (1, 11):
     with col3:
         city_y = st.number_input(f"y-coordinate (City {i+1})", value=default_city["y"])
 
-    if city_name:
-        cities_name.append((city_name, city_x, city_y))
+    cities_names.append(city_name)
+    x.append(city_x)
+    y.append(city_y)
 
 st.button("Submit")
 
