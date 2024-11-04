@@ -24,9 +24,7 @@ default_cities = [
 ]
 
 # Variables to store city names and coordinates
-cities_names = []
-x = []
-y = []
+cities_names = [], x = [], y = []
 
 # Collect input from the user for each city
 for i, default_city in enumerate(default_cities):
@@ -34,7 +32,9 @@ for i, default_city in enumerate(default_cities):
     city_x = st.number_input(f"City {city_name} X-coordinate", value=default_city["x"])
     city_y = st.number_input(f"City {city_name} Y-coordinate", value=default_city["y"])
 
-    cities_names.append(city_name), x.append(city_x), y.append(city_y)
+    cities_names.append(city_name)
+    x.append(city_x)
+    y.append(city_y)
 
 # Create dictionary of city coordinates
 city_coords = dict(zip(cities_names, zip(x, y)))
