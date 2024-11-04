@@ -38,9 +38,9 @@ for i in range(0, len(default_cities), 3):
             default_city = default_cities[i + j]
             with cols[j]:
                 # Input city name, x-coordinate, and y-coordinate
-                city_name = st.text_input(f"City {i+1}", value=default_city["name"])
-                city_x = st.number_input(f"x-coordinate (City {i+1})", value=default_city["x"])
-                city_y = st.number_input(f"y-coordinate (City {i+1})", value=default_city["y"])
+                city_name = st.text_input(f"City {i+ j + 1}", value=default_city["name"])
+                city_x = st.number_input(f"x-coordinate (City {i+ j + 1})", value=default_city["x"])
+                city_y = st.number_input(f"y-coordinate (City {i+ J + 1})", value=default_city["y"])
                 
                 cities_names.append(city_name)
                 x.append(city_x)
