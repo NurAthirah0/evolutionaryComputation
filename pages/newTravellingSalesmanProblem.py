@@ -29,21 +29,22 @@ x = []
 y = []
 
 # Collect input from the user for each city
-for i in range (1, 11):
-    col1, col2, col3, col4 = st.columns([3, 2, 2, 1])
-    # City name input
-    with col1:
-        city_name = st.text_input(f"City {i+1}", value=default_city["name"])
-    # X-coordinate input
-    with col2:
-        city_x = st.number_input(f"x-coordinate (City {i+1})", value=default_city["x"])
-    # Y-coordinate input
-    with col3:
-        city_y = st.number_input(f"y-coordinate (City {i+1})", value=default_city["y"])
+for i in range(0, len(default_cities), 3):
+    # Create 3 columns for each row
+    cols = st.columns(3)
 
-    cities_names.append(city_name)
-    x.append(city_x)
-    y.append(city_y)
+    for j in range(3):
+        if i + j < len(default_cities):
+            default_city = default_cities[i + j]
+            with cols[j]:
+                # Input city name, x-coordinate, and y-coordinate
+                city_name = st.text_input(f"City {i+1}", value=default_city["name"])
+                city_x = st.number_input(f"x-coordinate (City {i+1})", value=default_city["x"])
+                city_y = st.number_input(f"y-coordinate (City {i+1})", value=default_city["y"])
+                
+                cities_names.append(city_name)
+                x.append(city_x)
+                y.append(city_y)
 
 st.button("Submit")
 
