@@ -37,10 +37,10 @@ for i, default_city in enumerate(default_cities):
         city_name = st.text_input(f"City {i + 1}", value=default_city["name"])
 
     with col2:
-        city_x = st.number_input(f"x-coordinate (City {i + j + 1})", value=default_city["x"])
+        city_x = st.number_input(f"x-coordinate (City {i + 1})", value=default_city["x"])
 
     with col3:
-        city_y = st.number_input(f"y-coordinate (City {i + j + 1})", value=default_city["y"])
+        city_y = st.number_input(f"y-coordinate (City {i + 1})", value=default_city["y"])
 
     cities_names.append(city_name)
     x.append(city_x)
