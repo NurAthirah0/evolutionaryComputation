@@ -12,6 +12,21 @@ cities_names = []
 x = []
 y = []
 
+for i in range(n_cities):
+    city_name = st.text_input(f"Enter the name of city {i+1}:", value=f"City{i+1}")
+    city_x = st.number_input(f"Enter the x-coordinate for {city_name}:", value=random.uniform(-10, 10))
+    city_y = st.number_input(f"Enter the y-coordinate for {city_name}:", value=random.uniform(-10, 10))
+    cities_names.append(city_name)
+    x.append(city_x)
+    y.append(city_y)
+
+city_coords = dict(zip(cities_names, zip(x, y)))
+
+# Connect cities with opaque lines
+for j, (other_city, (other_x, other_y)) in enumerate(city_coords.items()):
+    if i != j:
+        ax.plot([city_x, other_x], [city_y, other_y], color='gray', linestyle='-', linewidth=1, alpha=0.1)
+
 # Pastel Pallete
 colors = sns.color_palette("pastel", len(cities_names))
 
@@ -31,20 +46,7 @@ city_icons = {
 
 fig, ax = plt.subplots()
 
-ax.grid(False)  # Grid
-
-for i, (city, (city_x, city_y)) in enumerate(city_coords.items()):
-    color = colors[i]
-    icon = city_icons[city]
-    ax.scatter(city_x, city_y, c=[color], s=1200, zorder=2)
-    ax.annotate(icon, (city_x, city_y), fontsize=40, ha='center', va='center', zorder=3)
-    ax.annotate(city, (city_x, city_y), fontsize=12, ha='center', va='bottom', xytext=(0, -30),
-                textcoords='offset points')
-
-    # Connect cities with opaque lines
-    for j, (other_city, (other_x, other_y)) in enumerate(city_coords.items()):
-        if i != j:
-            ax.plot([city_x, other_x], [city_y, other_y], color='gray', linestyle='-', linewidth=1, alpha=0.1)
+ax.grid(False)
 
 fig.set_size_inches(16, 12)
 st.pyplot(fig)
