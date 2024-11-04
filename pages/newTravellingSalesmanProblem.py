@@ -38,6 +38,8 @@ for i, default_city in enumerate(default_cities):
     x.append(city_x)
     y.append(city_y)
 
+st.button("Submit")
+
 # Create dictionary of city coordinates
 city_coords = dict(zip(cities_names, zip(x, y)))
 
@@ -83,8 +85,6 @@ for i, (city, (city_x, city_y)) in enumerate(city_coords.items()):
 
 fig.set_size_inches(16, 12)
 st.pyplot(fig)
-
-st.button("Submit")
 
 #population
 def initial_population(cities_list, n_population = 250):
