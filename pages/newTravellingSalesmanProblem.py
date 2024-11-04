@@ -12,12 +12,6 @@ cities_names = []
 x = []
 y = []
 
-city_coords = dict(zip(cities_names, zip(x, y)))
-n_population = 250
-crossover_per = 0.8
-mutation_per = 0.2
-n_generations = 200
-
 # Pastel Pallete
 colors = sns.color_palette("pastel", len(cities_names))
 
