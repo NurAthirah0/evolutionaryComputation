@@ -11,16 +11,16 @@ st.title("City Coordinates Input for TSP")
 
 # Default city values
 default_cities = [
-    {"name": "Gliwice", "x": 0, "y": 1},
-    {"name": "Cairo", "x": 3, "y": 2},
-    {"name": "Rome", "x": 6, "y": 1},
-    {"name": "Krakow", "x": 7, "y": 4.5},
-    {"name": "Paris", "x": 15, "y": -1},
-    {"name": "Alexandria", "x": 10, "y": 2.5},
-    {"name": "Berlin", "x": 16, "y": 11},
-    {"name": "Tokyo", "x": 5, "y": 6},
-    {"name": "Rio", "x": 8, "y": 9},
-    {"name": "Budapest", "x": 1.5, "y": 12},
+    {"name": "Ipoh", "x": 0, "y": 1},
+    {"name": "Kangar", "x": 3, "y": 2},
+    {"name": "Alor Setar", "x": 6, "y": 1},
+    {"name": "George Town", "x": 7, "y": 4.5},
+    {"name": "Shah Alam", "x": 15, "y": -1},
+    {"name": "Johor Bahru", "x": 10, "y": 2.5},
+    {"name": "Kuantan", "x": 16, "y": 11},
+    {"name": "Kuala Terengganu", "x": 5, "y": 6},
+    {"name": "Kota Bharu", "x": 8, "y": 9},
+    {"name": "Bota", "x": 1.5, "y": 12},
 ]
 
 # Variables to store city names and coordinates
@@ -43,16 +43,16 @@ city_coords = dict(zip(cities_names, zip(x, y)))
 
 # City Icons
 city_icons = {
-    "Gliwice": "♕",
-    "Cairo": "♖",
-    "Rome": "♗",
-    "Krakow": "♘",
-    "Paris": "♙",
-    "Alexandria": "♔",
-    "Berlin": "♚",
-    "Tokyo": "♛",
-    "Rio": "♜",
-    "Budapest": "♝"
+    "Ipoh": "♕",
+    "Kangar": "♖",
+    "Alor Setar": "♗",
+    "George Town": "♘",
+    "Shah Alam": "♙",
+    "Johor Bahru": "♔",
+    "Kuantan": "♚",
+    "Kuala Terengganu": "♛",
+    "Kota Bharu": "♜",
+    "Bota": "♝"
 }
 
 # Genetic Algorithm Parameters
