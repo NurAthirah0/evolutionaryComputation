@@ -30,7 +30,7 @@ y = []
 
 # Collect input from the user for each city
 for i in range (1, 11):
-    col1, col2, col3, col4 = st.columns([3, 2, 2, 1)]
+    col1, col2, col3, col4 = st.columns([3, 2, 2, 1])
     # City name input
     with col1:
         city_name = st.text_input(f"City {i+1}", value=default_city["name"])
