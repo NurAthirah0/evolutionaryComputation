@@ -6,8 +6,8 @@ from itertools import permutations, combinations
 import random
 from random import shuffle
 
-# Set up user input form for cities and coordinates
 st.title("City Coordinates Input")
+st.write("Enter up to 10 cities with their coordinates (x,y) in range 1-10.")
 
 # Default city values
 default_cities = [
@@ -29,14 +29,20 @@ x = []
 y = []
 
 # Collect input from the user for each city
-for i, default_city in enumerate(default_cities):
-    city_name = st.text_input(f"City {i+1}", value=default_city["name"])
-    city_x = st.number_input(f"x-coordinate (City {i+1})", value=default_city["x"])
-    city_y = st.number_input(f"y-coordinate (City {i+1})", value=default_city["y"])
+for i in range (1, 11):
+    col1, col2, col3, col4 = st.columns([3, 2, 2, 1)]
+    # City name input
+    with col1:
+        city_name = st.text_input(f"City {i+1}", value=default_city["name"])
+    # X-coordinate input
+    with col2:
+        city_x = st.number_input(f"x-coordinate (City {i+1})", value=default_city["x"])
+    # Y-coordinate input
+    with col3:
+        city_y = st.number_input(f"y-coordinate (City {i+1})", value=default_city["y"])
 
-    cities_names.append(city_name)
-    x.append(city_x)
-    y.append(city_y)
+    if city_name:
+        cities_name.append((city_name, city_x, city_y))
 
 st.button("Submit")
 
