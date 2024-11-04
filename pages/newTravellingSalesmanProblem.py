@@ -2,49 +2,72 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
-from itertools import permutations
+from itertools import permutations, combinations
 import random
+from random import shuffle
 
-# User inputs for cities and coordinates
-n_cities = st.number_input("Enter the number of cities:", min_value=2, max_value=20, value=10)
+# Set up user input form for cities and coordinates
+st.title("City Coordinates Input for TSP")
 
+# Default city values
+default_cities = [
+    {"name": "Gliwice", "x": 0, "y": 1},
+    {"name": "Cairo", "x": 3, "y": 2},
+    {"name": "Rome", "x": 6, "y": 1},
+    {"name": "Krakow", "x": 7, "y": 4.5},
+    {"name": "Paris", "x": 15, "y": -1},
+    {"name": "Alexandria", "x": 10, "y": 2.5},
+    {"name": "Berlin", "x": 16, "y": 11},
+    {"name": "Tokyo", "x": 5, "y": 6},
+    {"name": "Rio", "x": 8, "y": 9},
+    {"name": "Budapest", "x": 1.5, "y": 12},
+]
+
+# Variables to store city names and coordinates
 cities_names = []
 x = []
 y = []
 
-# Pastel Pallete
+# Collect input from the user for each city
+for i, default_city in enumerate(default_cities):
+    city_name = st.text_input(f"City {i+1} Name", value=default_city["name"])
+    city_x = st.number_input(f"City {city_name} X-coordinate", value=default_city["x"])
+    city_y = st.number_input(f"City {city_name} Y-coordinate", value=default_city["y"])
+
+    cities_names.append(city_name)
+    x.append(city_x)
+    y.append(city_y)
+
+# Create dictionary of city coordinates
+city_coords = dict(zip(cities_names, zip(x, y)))
+
+# Genetic Algorithm Parameters
+n_population = 250
+crossover_per = 0.8
+mutation_per = 0.2
+n_generations = 200
+
+# Pastel color palette
 colors = sns.color_palette("pastel", len(cities_names))
 
-# City Icons
-city_icons = {
-    "Gliwice": "♕",
-    "Cairo": "♖",
-    "Rome": "♗",
-    "Krakow": "♘",
-    "Paris": "♙",
-    "Alexandria": "♔",
-    "Berlin": "♚",
-    "Tokyo": "♛",
-    "Rio": "♜",
-    "Budapest": "♝"
-}
-
-# Plotting the cities on the map
+# Plot the cities with icons and annotations
 fig, ax = plt.subplots()
-colors = sns.color_palette("pastel", len(cities_names))
 
 for i, (city, (city_x, city_y)) in enumerate(city_coords.items()):
     color = colors[i]
     ax.scatter(city_x, city_y, c=[color], s=1200, zorder=2)
     ax.annotate(city, (city_x, city_y), fontsize=12, ha='center', va='center')
-    
+
     # Connect cities with opaque lines
     for j, (other_city, (other_x, other_y)) in enumerate(city_coords.items()):
         if i != j:
             ax.plot([city_x, other_x], [city_y, other_y], color='gray', linestyle='-', linewidth=1, alpha=0.1)
 
-fig.set_size_inches(10, 8)
+fig.set_size_inches(16, 12)
 st.pyplot(fig)
+
+# The rest of the genetic algorithm code continues here...
+
 
 #population
 def initial_population(cities_list, n_population = 250):
