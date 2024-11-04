@@ -7,7 +7,7 @@ import random
 from random import shuffle
 
 # Set up user input form for cities and coordinates
-st.title("City Coordinates Input")
+st.title("City Coordinates Input for TSP")
 
 # Default city values
 default_cities = [
@@ -24,7 +24,9 @@ default_cities = [
 ]
 
 # Variables to store city names and coordinates
-cities_names = [], x = [], y = []
+cities_names = []
+x = []
+y = []
 
 # Collect input from the user for each city
 for i, default_city in enumerate(default_cities):
@@ -39,6 +41,20 @@ for i, default_city in enumerate(default_cities):
 # Create dictionary of city coordinates
 city_coords = dict(zip(cities_names, zip(x, y)))
 
+# City Icons
+city_icons = {
+    "Gliwice": "♕",
+    "Cairo": "♖",
+    "Rome": "♗",
+    "Krakow": "♘",
+    "Paris": "♙",
+    "Alexandria": "♔",
+    "Berlin": "♚",
+    "Tokyo": "♛",
+    "Rio": "♜",
+    "Budapest": "♝"
+}
+
 # Genetic Algorithm Parameters
 n_population = 250
 crossover_per = 0.8
@@ -50,11 +66,15 @@ colors = sns.color_palette("pastel", len(cities_names))
 
 # Plot the cities with icons and annotations
 fig, ax = plt.subplots()
+ax.grid(False)  # Disable grid
 
 for i, (city, (city_x, city_y)) in enumerate(city_coords.items()):
     color = colors[i]
+    icon = city_icons.get(city, "⬤")  # Default icon if city name is not in city_icons
     ax.scatter(city_x, city_y, c=[color], s=1200, zorder=2)
-    ax.annotate(city, (city_x, city_y), fontsize=12, ha='center', va='center')
+    ax.annotate(icon, (city_x, city_y), fontsize=40, ha='center', va='center', zorder=3)
+    ax.annotate(city, (city_x, city_y), fontsize=12, ha='center', va='bottom', xytext=(0, -30),
+                textcoords='offset points')
 
     # Connect cities with opaque lines
     for j, (other_city, (other_x, other_y)) in enumerate(city_coords.items()):
@@ -63,9 +83,6 @@ for i, (city, (city_x, city_y)) in enumerate(city_coords.items()):
 
 fig.set_size_inches(16, 12)
 st.pyplot(fig)
-
-# The rest of the genetic algorithm code continues here...
-
 
 #population
 def initial_population(cities_list, n_population = 250):
