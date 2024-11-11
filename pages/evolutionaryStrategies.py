@@ -190,6 +190,6 @@ mu = 20
 lam = 100
 # perform the evolution strategy (mu + lambda) search
 best, score = es_plus(objective, bounds, n_iter, step_size, mu, lam)
-st.write()
+st.write('')
 st.write('Done!')
 st.write('f(%s) = %f' % (best, score))
