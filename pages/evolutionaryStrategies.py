@@ -8,6 +8,7 @@ from numpy import pi
 from numpy import meshgrid
 from matplotlib import pyplot
 from mpl_toolkits.mplot3d import Axes3D
+import streamlit as st
 
 # objective function
 def objective(x, y):
@@ -24,7 +25,7 @@ x, y = meshgrid(xaxis, yaxis)
 results = objective(x, y)
 # create a surface plot with the jet color scheme
 figure = pyplot.figure()
-axis = figure.gca(projection='3d')
+axis = figure.add_subplot(projection='3d')
 axis.plot_surface(x, y, results, cmap='jet')
 # show the plot
 st.pyplot(fig)
