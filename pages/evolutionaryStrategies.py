@@ -27,7 +27,7 @@ figure = pyplot.figure()
 axis = figure.add_subplot(projection='3d')
 axis.plot_surface(x, y, results, cmap='jet')
 # show the plot
-st.pyplot(fig)
+pyplot.show()
 
 # evolution strategy (mu, lambda) of the ackley objective function
 from numpy import asarray
