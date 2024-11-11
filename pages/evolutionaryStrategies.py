@@ -10,6 +10,9 @@ from matplotlib import pyplot
 from mpl_toolkits.mplot3d import Axes3D
 import streamlit as st
 
+st.title('Evolutionary Strategies.')
+st.write('The surface plot of the Ackley function showing the vast number of local optima.')
+
 # objective function
 def objective(x, y):
 	return -20.0 * exp(-0.2 * sqrt(0.5 * (x**2 + y**2))) - exp(0.5 * (cos(2 * pi * x) + cos(2 * pi * y))) + e + 20
@@ -123,6 +126,8 @@ from numpy.random import randn
 from numpy.random import rand
 from numpy.random import seed
 
+st.text('')
+
 # objective function
 def objective(v):
 	x, y = v
@@ -190,6 +195,5 @@ mu = 20
 lam = 100
 # perform the evolution strategy (mu + lambda) search
 best, score = es_plus(objective, bounds, n_iter, step_size, mu, lam)
-st.text('')
 st.write('Done!')
 st.write('f(%s) = %f' % (best, score))
