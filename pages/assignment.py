@@ -1,4 +1,3 @@
-import csv
 import streamlit as st
 
 # Function to read the CSV file and convert it to the desired format
