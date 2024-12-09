@@ -1,12 +1,6 @@
 import csv
 import streamlit as st
 
-import pandas as pd
-
-df=pd.read_csv('new_programming_ratings.csv')
-result=df.to_dict
-st.write(result)
-
 # Function to read the CSV file and convert it to the desired format
 def read_csv_to_dict(file_path):
     program_ratings = {}
@@ -24,7 +18,7 @@ def read_csv_to_dict(file_path):
     return program_ratings
 
 # Path to the CSV file
-file_path = 'new_program_ratings.csv'
+file_path = 'https://raw.githubusercontent.com/NurAthirah0/evolutionaryComputation/refs/heads/main/pages/new_program_ratings.csv'
 
 # Get the data in the required format
 program_ratings_dict = read_csv_to_dict(file_path)
