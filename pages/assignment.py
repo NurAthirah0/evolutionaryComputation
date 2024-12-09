@@ -43,8 +43,6 @@ ratings = program_ratings_dict
 
 GEN = 100
 POP = 50
-CO_R 
-MUT_R 
 EL_S = 2
 
 all_programs = list(ratings.keys()) # all programs
