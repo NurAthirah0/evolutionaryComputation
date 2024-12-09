@@ -1,6 +1,12 @@
 import csv
 import streamlit as st
 
+import pandas as pd
+
+df=pd.read_csv('new_programming_ratings')
+result=df.to_dict
+st.write(result)
+
 # Function to read the CSV file and convert it to the desired format
 def read_csv_to_dict(file_path):
     program_ratings = {}
