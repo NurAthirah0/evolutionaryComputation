@@ -45,8 +45,8 @@ ratings = program_ratings_dict
 
 GEN = 100
 POP = 50
-CO_R = 0.8
-MUT_R = 0.2
+CO_R 
+MUT_R 
 EL_S = 2
 
 all_programs = list(ratings.keys()) # all programs
@@ -153,6 +153,8 @@ def genetic_algorithm(initial_schedule, generations=GEN, population_size=POP, cr
 ##################################################### RESULTS ###################################################################################
 
 # brute force
+import pandas as pd
+
 initial_best_schedule = finding_best_schedule(all_possible_schedules)
 
 rem_t_slots = len(all_time_slots) - len(initial_best_schedule)
@@ -160,8 +162,14 @@ genetic_schedule = genetic_algorithm(initial_best_schedule, generations=GEN, pop
 
 final_schedule = initial_best_schedule + genetic_schedule[:rem_t_slots]
 
+# schedule in table format
+schedule_program = {
+  "Time Slot": [f"Time Slot {all_time_slots[time_slot]:02d}:00"],
+  "Program": final_schedule
+}
+schedule_df = pd.DataFrame(schedule_program)
+
 st.write("\nFinal Optimal Schedule:")
-for time_slot, program in enumerate(final_schedule):
-    st.table(f"Time Slot {all_time_slots[time_slot]:02d}:00 - Program {program}")
+st.table(schedule_df)
 
 st.write("Total Ratings:", fitness_function(final_schedule))
