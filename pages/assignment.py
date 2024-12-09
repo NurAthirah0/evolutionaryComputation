@@ -3,7 +3,7 @@ import streamlit as st
 
 import pandas as pd
 
-df=pd.read_csv('new_programming_ratings')
+df=pd.read_csv('new_programming_ratings.csv')
 result=df.to_dict
 st.write(result)
 
