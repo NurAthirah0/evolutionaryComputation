@@ -11,8 +11,8 @@ MUT_R = st.number_input("Mutation Rate (range from 0.01 to 0.05)", min_value = 0
 st.button("Generate")
 
 st.subheader("The parameters used:")
-st.write(f"Crossover rate: ", CO_R)
-st.write(f"Mutation rate: ", MUT_R)
+st.write("Crossover rate: ", CO_R)
+st.write("Mutation rate: ", MUT_R)
 
 import csv
 
@@ -169,7 +169,7 @@ schedule_program = {
 }
 schedule_df = pd.DataFrame(schedule_program)
 
-st.subheader("\nFinal Optimal Schedule:")
+st.subheader(f"Final Optimal Schedule:")
 st.table(schedule_df)
 
 st.write("Total Ratings:", fitness_function(final_schedule))
