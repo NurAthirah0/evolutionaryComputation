@@ -169,7 +169,7 @@ schedule_program = {
 }
 schedule_df = pd.DataFrame(schedule_program)
 
-st.write("\nFinal Optimal Schedule:")
+st.subheader("\nFinal Optimal Schedule:")
 st.table(schedule_df)
 
 st.write("Total Ratings:", fitness_function(final_schedule))
