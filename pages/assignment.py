@@ -11,8 +11,8 @@ MUT_R = st.number_input("Mutation Rate (range from 0.01 to 0.05)", min_value = 0
 st.button("Generate")
 
 st.subheader("The parameters used:")
-st.write("Crossover rate: ", CO_R)
-st.write("Mutation rate: ", MUT_R)
+st.write(f"Crossover rate: ", CO_R)
+st.write(f"Mutation rate: ", MUT_R)
 
 import csv
 
