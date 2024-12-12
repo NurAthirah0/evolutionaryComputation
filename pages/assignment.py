@@ -1,6 +1,7 @@
 import streamlit as st
 
-st.title("TV Program Schedule 📺 (assignment)")
+st.title("TV Program Schedule 📺")
+st.subheader("ASSIGNMENT")
 
 CO_R = st.number_input("Crossover Rate (range from 0.0 to 0.95)", min_value = 0.0, max_value = 0.95, 
                        value = 0.8, step= 0.01)
@@ -9,6 +10,10 @@ MUT_R = st.number_input("Mutation Rate (range from 0.01 to 0.05)", min_value = 0
                         value = 0.02, step = 0.01)
 
 st.button("Generate")
+
+st.header("The parameters used:")
+st.write("Crossover rate: ", CO_R)
+st.write("Mutation rate: ", MUT_R)
 
 import csv
 
