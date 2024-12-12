@@ -2,6 +2,7 @@ import streamlit as st
 
 st.title("TV Program Schedule 📺 (assignment)")
 
+st.subheader("Enter the following parameters: ")
 CO_R = st.number_input("Crossover Rate (range from 0.0 to 0.95)", min_value = 0.0, max_value = 0.95, 
                        value = 0.8, step= 0.01)
 
@@ -10,9 +11,9 @@ MUT_R = st.number_input("Mutation Rate (range from 0.01 to 0.05)", min_value = 0
 
 st.button("Generate")
 
-st.subheader("The parameters used:")
-st.write("Crossover rate: ", CO_R)
-st.write("Mutation rate: ", MUT_R)
+st.subheader("The parameters used: ")
+st.write("Crossover Rate: ", CO_R)
+st.write("Mutation Rate: ", MUT_R)
 
 import csv
 
@@ -169,7 +170,7 @@ schedule_program = {
 }
 schedule_df = pd.DataFrame(schedule_program)
 
-st.subheader(f"Final Optimal Schedule:")
+st.header("Final Optimal Schedule:")
 st.table(schedule_df)
 
 st.write("Total Ratings:", fitness_function(final_schedule))
