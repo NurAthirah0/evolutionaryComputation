@@ -48,4 +48,3 @@ if st.button("Predict Loan Eligibility"):
     prediction = model.predict(input_data)
     result = "Eligible" if prediction[0] == 1 else "Not Eligible"
     st.success(f"The applicant is {result}.")
-
