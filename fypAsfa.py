@@ -23,23 +23,26 @@ loan_amount_term = st.number_input("Loan Amount Term (months)", min_value=0)
 credit_history = st.selectbox("Credit History", ["Good (1)", "Bad (0)"])
 property_area = st.selectbox("Property Area", ["Urban", "Rural", "Semiurban"])
 
-# Data preprocessing for prediction
 def preprocess_input():
+    # Encode categorical variables as used in training
     gender_val = 1 if gender == "Male" else 0
     married_val = 1 if married == "Yes" else 0
     education_val = 1 if education == "Graduate" else 0
     self_employed_val = 1 if self_employed == "Yes" else 0
     credit_history_val = 1 if credit_history == "Good (1)" else 0
-    property_area_urban = 1 if property_area == "Urban" else 0
     property_area_rural = 1 if property_area == "Rural" else 0
     property_area_semiurban = 1 if property_area == "Semiurban" else 0
 
-    # Return processed input as a single array
+    # Apply square root transformation to match training
+    applicant_income_sqrt = np.sqrt(applicant_income)
+    coapplicant_income_sqrt = np.sqrt(coapplicant_income)
+    loan_amount_sqrt = np.sqrt(loan_amount)
+
+    # Create input array in the same order as model training
     return np.array([[
         gender_val, married_val, education_val, self_employed_val,
-        np.sqrt(applicant_income), np.sqrt(coapplicant_income),
-        np.sqrt(loan_amount), loan_amount_term,
-        credit_history_val, property_area_rural, property_area_semiurban
+        applicant_income_sqrt, coapplicant_income_sqrt, loan_amount_sqrt,
+        loan_amount_term, credit_history_val, property_area_rural, property_area_semiurban
     ]])
 
 # Predict button
