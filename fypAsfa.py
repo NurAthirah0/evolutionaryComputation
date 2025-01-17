@@ -1,53 +1,66 @@
 import streamlit as st
-import pickle
+import pandas as pd
 import numpy as np
-
-# Load the logistic regression model
-with open("logistic_regression_model.pkl", "rb") as file:
-    model = pickle.load(file)
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, classification_report
 
 # Title of the app
 st.title("Loan Eligibility Prediction")
 
-# Input fields
-st.header("Enter Applicant Details")
+# File uploader
+uploaded_file = st.file_uploader("Upload Loan Dataset (CSV)", type="csv")
 
-gender = st.selectbox("Gender", ["Male", "Female"])
-married = st.selectbox("Married", ["Yes", "No"])
-education = st.selectbox("Education", ["Graduate", "Not Graduate"])
-self_employed = st.selectbox("Self-Employed", ["Yes", "No"])
-applicant_income = st.number_input("Applicant Income", min_value=0)
-coapplicant_income = st.number_input("Coapplicant Income", min_value=0)
-loan_amount = st.number_input("Loan Amount", min_value=0)
-loan_amount_term = st.number_input("Loan Amount Term (months)", min_value=0)
-credit_history = st.selectbox("Credit History", ["Good (1)", "Bad (0)"])
-property_area = st.selectbox("Property Area", ["Urban", "Rural", "Semiurban"])
+if uploaded_file is not None:
+    # Load the dataset
+    df = pd.read_csv(uploaded_file)
+    st.write("Dataset Preview:")
+    st.dataframe(df.head())
+    
+    # Preprocess the data
+    df = df.drop(['Loan_ID'], axis=1)
+    df['Gender'].fillna(df['Gender'].mode()[0], inplace=True)
+    df['Married'].fillna(df['Married'].mode()[0], inplace=True)
+    df['Dependents'].fillna(df['Dependents'].mode()[0], inplace=True)
+    df['Self_Employed'].fillna(df['Self_Employed'].mode()[0], inplace=True)
+    df['Credit_History'].fillna(df['Credit_History'].mode()[0], inplace=True)
+    df['Loan_Amount_Term'].fillna(df['Loan_Amount_Term'].mode()[0], inplace=True)
+    df['LoanAmount'].fillna(df['LoanAmount'].mean(), inplace=True)
+    
+    # Encoding categorical variables
+    df = pd.get_dummies(df, drop_first=True)
+    
+    # Feature-target split
+    X = df.drop("Loan_Status_Y", axis=1)
+    y = df["Loan_Status_Y"]
+    
+    # Scaling
+    X = MinMaxScaler().fit_transform(X)
+    
+    # Train-test split
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+    
+    # Logistic Regression
+    model = LogisticRegression(solver='saga', max_iter=500, random_state=1)
+    model.fit(X_train, y_train)
+    y_pred = model.predict(X_test)
+    
+    # Accuracy
+    acc = accuracy_score(y_test, y_pred)
+    st.write(f"Model Accuracy: {acc * 100:.2f}%")
+    st.text("Classification Report:")
+    st.text(classification_report(y_test, y_pred))
+    
+    # Prediction
+    st.subheader("Make a Prediction")
+    inputs = {}
+    for column in df.columns[:-1]:
+        inputs[column] = st.number_input(column, value=0.0)
+    inputs_df = pd.DataFrame([inputs])
+    
+    if st.button("Predict"):
+        prediction = model.predict(inputs_df)
+        result = "Approved" if prediction[0] == 1 else "Rejected"
+        st.write(f"Loan Status: {result}")
 
-def preprocess_input():
-    # Encode categorical variables as used in training
-    gender_val = 1 if gender == "Male" else 0
-    married_val = 1 if married == "Yes" else 0
-    education_val = 1 if education == "Graduate" else 0
-    self_employed_val = 1 if self_employed == "Yes" else 0
-    credit_history_val = 1 if credit_history == "Good (1)" else 0
-    property_area_rural = 1 if property_area == "Rural" else 0
-    property_area_semiurban = 1 if property_area == "Semiurban" else 0
-
-    # Apply square root transformation to match training
-    applicant_income_sqrt = np.sqrt(applicant_income)
-    coapplicant_income_sqrt = np.sqrt(coapplicant_income)
-    loan_amount_sqrt = np.sqrt(loan_amount)
-
-    # Create input array in the same order as model training
-    return np.array([[
-        gender_val, married_val, education_val, self_employed_val,
-        applicant_income_sqrt, coapplicant_income_sqrt, loan_amount_sqrt,
-        loan_amount_term, credit_history_val, property_area_rural, property_area_semiurban
-    ]])
-
-# Predict button
-if st.button("Predict Loan Eligibility"):
-    input_data = preprocess_input()
-    prediction = model.predict(input_data)
-    result = "Eligible" if prediction[0] == 1 else "Not Eligible"
-    st.success(f"The applicant is {result}.")
