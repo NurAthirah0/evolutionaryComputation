@@ -63,4 +63,3 @@ if uploaded_file is not None:
         prediction = model.predict(inputs_df)
         result = "Approved" if prediction[0] == 1 else "Rejected"
         st.write(f"Loan Status: {result}")
-
